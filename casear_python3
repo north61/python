@@ -1,0 +1,39 @@
+def casearDecrypt(ciphertext, source_char, destination_char, list_all):
+
+    if list_all == True:
+        for offset in range(1, 27):
+            convertChar(offset)
+    else:
+        offset =  ord(destination_char) - ord(source_char)
+        convertChar(offset)
+
+def convertChar(offset):
+    chars = "abcdefghijklmnopqrstuvwxyz"
+    for char in ciphertext:
+
+        is_upper_flag = 0
+        if char.isupper():
+            char = char.lower()
+            is_upper_flag = 1
+
+        if char not in chars:
+            outputChar(is_upper_flag, char)
+            continue
+
+        tempchar_ascii = ord(char) + offset
+        tempchar =chr(tempchar_ascii)
+        if tempchar not in chars:
+            if offset < 0:
+                tempchar_ascii += len(chars)
+            else:
+                tempchar_ascii -= len(chars)
+        tempchar = chr(tempchar_ascii)
+        outputChar(is_upper_flag, tempchar)
+    print("")
+
+def outputChar(is_upper_flag, char):
+
+    if is_upper_flag == 1:
+        print(char.upper(), end="")
+    else:
+        print(char, end="")
