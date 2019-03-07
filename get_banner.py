@@ -27,9 +27,9 @@ class get_titleThread(threading.Thread):
 def request_http(q,thread_id):
     while q.empty() != True:
         domain = q.get()          
-        r1 = requests.get("https://"+domain.rstrip())
+        r1 = requests.get("https://"+domain.rstrip(),verify=False)
         result_q.put(r1)
-        r2 = requests.get("http://"+domain.rstrip())
+        r2 = requests.get("http://"+domain.rstrip(),verify=False)
         result_q.put(r2)
 
 def insert_result(q):
